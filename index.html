@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>Horyn Book OS – HORYZON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bk:#000;--gr:#1d1d1f;--lt:#f5f5f7;--tx:#f5f5f7;--mu:#86868b;--ac:#2997ff;
+  --grad:linear-gradient(90deg,#8b7bff,#35d5ff 50%,#ff6fd0);
+  --ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bk);color:var(--tx);font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:-.011em;line-height:1.47;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:8px}
+svg{display:block}
+.wrap{max-width:1260px;margin:0 auto;padding:0 22px}
+
+/* global nav */
+.gn{height:44px;background:rgba(22,22,23,.9);position:relative;z-index:30}
+.gn .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1024px}
+.gn a,.gn button{font-size:12px;color:#d2d2d7;opacity:.85;transition:opacity .2s;display:flex;align-items:center}
+.gn a:hover,.gn button:hover{opacity:1;color:#fff}
+.gn .logo svg{width:16px;height:16px;color:#f5f5f7}
+.gn ul{display:flex;gap:34px;list-style:none}
+.gn .ic{display:flex;gap:22px}
+@media(max-width:820px){.gn ul li:nth-child(n+4){display:none}.gn ul{gap:20px}}
+
+/* local nav */
+.ln{position:sticky;top:0;z-index:40;height:52px;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid transparent;transition:border-color .3s}
+.ln.s{border-color:rgba(255,255,255,.14)}
+.ln .wrap{max-width:1024px;display:flex;align-items:center;justify-content:space-between;height:100%}
+.ln b{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.ln nav{display:flex;align-items:center;gap:26px;font-size:12px;color:#d2d2d7}
+.ln nav a:hover{color:#fff}
+.pill{background:var(--ac);color:#fff!important;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:500}
+@media(max-width:700px){.ln nav a:not(.pill){display:none}}
+
+/* hero */
+.hero{text-align:center;padding:90px 22px 70px;position:relative;overflow:hidden}
+.eyebrow{font-size:19px;font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.hero h1{font-size:clamp(54px,11vw,140px);font-weight:700;letter-spacing:-.055em;line-height:1;margin-top:8px}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:clamp(20px,3vw,32px);font-weight:500;color:#d2d2d7;margin:18px auto 0;max-width:720px;line-height:1.2;letter-spacing:-.02em}
+.cta{display:flex;gap:26px;justify-content:center;align-items:center;margin-top:30px;flex-wrap:wrap}
+.btn{background:var(--ac);color:#fff;border-radius:99px;padding:12px 24px;font-size:17px;font-weight:500;transition:background .2s,transform .2s}
+.btn:hover{background:#0a84ff;transform:scale(1.02)}
+.lnk{color:var(--ac);font-size:19px;display:inline-flex;gap:8px;align-items:center}
+.lnk:hover{text-decoration:underline}
+.hero::before{content:"";position:absolute;left:50%;top:-30%;width:900px;height:900px;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(110,90,255,.28),rgba(40,180,255,.1) 40%,transparent 65%);filter:blur(30px);pointer-events:none;animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{50%{transform:translateX(-50%) scale(1.12);opacity:.8}}
+.hero>*{position:relative}
+.hero .in{opacity:0;transform:translateY(28px);animation:up 1.1s var(--ease) forwards}
+.hero .in:nth-child(2){animation-delay:.12s}.hero .in:nth-child(3){animation-delay:.26s}.hero .in:nth-child(4){animation-delay:.4s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* pinned device */
+.pin{height:320vh;position:relative}
+.stick{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center}
+.dev{width:100vw;height:100vh;position:relative;overflow:hidden;background:#07071a;will-change:transform;transform:scale(.5);border-radius:60px;--p:0;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.wp i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.85}
+.wp i:nth-child(1){width:60%;height:70%;left:-10%;top:-10%;background:#5b4bff;animation:d1 14s ease-in-out infinite alternate}
+.wp i:nth-child(2){width:55%;height:65%;right:-8%;top:10%;background:#00c2ff;animation:d1 17s ease-in-out infinite alternate-reverse}
+.wp i:nth-child(3){width:50%;height:55%;left:25%;bottom:-20%;background:#ff4fb8;animation:d1 19s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(8%,10%) scale(1.15)}}
+.mb{position:absolute;inset:0 0 auto;height:3.2%;min-height:22px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);display:flex;align-items:center;gap:22px;padding:0 2%;font-size:clamp(9px,1vw,13px);font-weight:500}
+.mb svg{width:12px;height:12px}.mb .r{margin-left:auto}
+.win{position:absolute;border-radius:14px;background:rgba(255,255,255,.78);backdrop-filter:blur(26px) saturate(160%);-webkit-backdrop-filter:blur(26px) saturate(160%);color:#1d1d1f;box-shadow:0 30px 70px rgba(0,0,0,.35);overflow:hidden;
+  transform:translateY(calc((1 - var(--p)) * var(--y,140px))) scale(calc(.9 + .1 * var(--p)));opacity:min(1,max(0,calc(var(--p) * 1.8 - .3)))}
+.win>u{display:block;height:34px;background:rgba(0,0,0,.05);position:relative;text-decoration:none}
+.win>u::before{content:"";position:absolute;left:14px;top:12px;width:10px;height:10px;border-radius:50%;background:#ff5f57;box-shadow:16px 0 #febc2e,32px 0 #28c840}
+.win .bd{padding:18px;display:grid;gap:10px}
+.win em{display:block;height:9px;border-radius:5px;background:rgba(0,0,0,.1)}
+.w1{left:7%;top:10%;width:38%;height:56%;--y:160px}
+.w2{right:7%;top:18%;width:34%;height:46%;--y:200px}
+.w3{left:30%;top:42%;width:32%;height:38%;--y:240px}
+.art{height:110px;border-radius:12px;background:conic-gradient(from 200deg,#8b7bff,#35d5ff,#ff6fd0,#8b7bff)}
+.wave{display:flex;gap:4px;align-items:flex-end;height:60px}
+.wave s{flex:1;background:#6c5cff;border-radius:3px;animation:eq 1.2s ease-in-out infinite alternate;text-decoration:none}
+.wave s:nth-child(2n){animation-duration:.8s;background:#35d5ff}.wave s:nth-child(3n){animation-duration:1.5s;background:#ff6fd0}
+@keyframes eq{from{height:12%}to{height:100%}}
+.dock{position:absolute;left:50%;bottom:2.5%;transform:translateX(-50%) translateY(calc((1 - var(--p)) * 80px));display:flex;gap:1.2%;padding:.9% 1.4%;border-radius:22px;background:rgba(255,255,255,.2);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.22);width:max-content}
+.dock div{width:clamp(30px,4.6vw,64px);aspect-ratio:1;border-radius:24%;display:grid;place-items:center;transition:transform .3s var(--ease)}
+.dock div:hover{transform:translateY(-14px) scale(1.25)}
+.dock svg{width:52%;height:52%;color:#fff}
+.cap{position:absolute;left:0;right:0;top:20%;text-align:center;font-size:clamp(30px,6vw,84px);font-weight:700;letter-spacing:-.045em;opacity:calc(1 - var(--p) * 3);pointer-events:none}
+@media(prefers-reduced-motion:reduce){.pin{height:auto}.stick{height:auto;padding:30px 0}.dev{transform:none!important;border-radius:28px;height:62vw;width:92vw}}
+
+/* scrubbed text */
+.scrub{height:260vh;position:relative}
+.scrub .stick{place-items:center start}
+.scrub p{max-width:1000px;margin:0 auto;padding:0 22px;font-size:clamp(30px,5.2vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.12}
+.scrub .w{opacity:.16;transition:opacity .25s}
+
+/* light section + rail */
+.light{background:var(--lt);color:var(--gr);padding:120px 0 110px}
+.sh{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.08}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:56px max(22px,calc((100vw - 1216px)/2)) 20px;scrollbar-width:none;scroll-padding:0 max(22px,calc((100vw - 1216px)/2))}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:0 0 min(86vw,540px);height:620px;border-radius:30px;background:#fff;scroll-snap-align:start;position:relative;overflow:hidden;padding:42px}
+.card h3{font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.14;max-width:380px}
+.card small{display:block;font-size:13px;font-weight:600;color:var(--mu);margin-bottom:8px}
+.card.k{background:#000;color:#f5f5f7}.card.g{background:linear-gradient(160deg,#2b1f6b,#0e2a5c)}.card.g small,.card.k small{color:#a1a1a6}
+.card .vis{position:absolute;left:0;right:0;bottom:0;height:58%;display:grid;place-items:center}
+.ctl{display:flex;justify-content:flex-end;gap:12px;padding:0 max(22px,calc((100vw - 1216px)/2))}
+.ctl button{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.08);display:grid;place-items:center;transition:background .2s}
+.ctl button:hover{background:rgba(0,0,0,.16)}
+.ring{animation:spin 18s linear infinite;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lay{animation:float 5s ease-in-out infinite}.lay:nth-child(2){animation-delay:-1.6s}.lay:nth-child(3){animation-delay:-3.2s}
+@keyframes float{50%{transform:translateY(-14px)}}
+
+/* sticky steps */
+.steps{height:380vh;position:relative}
+.steps .stick{grid-template-columns:1fr 1.25fr;gap:4vw;padding:0 max(22px,calc((100vw - 1216px)/2));place-items:center stretch}
+.st-t{position:relative;height:260px}
+.st{position:absolute;inset:0;opacity:0;transform:translateY(26px);transition:all .8s var(--ease);pointer-events:none}
+.st.on{opacity:1;transform:none}
+.st h3{font-size:clamp(34px,4.6vw,60px);font-weight:700;letter-spacing:-.045em;line-height:1.04}
+.st h3 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.st p{font-size:21px;color:#a1a1a6;margin-top:18px;max-width:430px;line-height:1.35}
+.ws{position:relative;height:min(64vh,560px);border-radius:28px;background:#0b0b10;border:1px solid #232328;overflow:hidden}
+.t{position:absolute;border-radius:16px;transition:all .9s var(--ease);overflow:hidden}
+.t::before{content:"";position:absolute;left:14px;top:14px;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);box-shadow:14px 0 rgba(255,255,255,.4),28px 0 rgba(255,255,255,.25)}
+.a{background:linear-gradient(135deg,#6c5cff,#3b2fb8)}.b{background:linear-gradient(135deg,#19c2ff,#0a63c9)}.c{background:linear-gradient(135deg,#ff6fd0,#b8337f)}
+.ws[data-s="0"] .a{left:6%;top:8%;width:88%;height:84%}.ws[data-s="0"] .b{left:30%;top:30%;width:40%;height:40%;opacity:0;transform:scale(.7)}.ws[data-s="0"] .c{left:30%;top:30%;width:40%;height:40%;opacity:0;transform:scale(.7)}
+.ws[data-s="1"] .a{left:4%;top:6%;width:46%;height:88%}.ws[data-s="1"] .b{left:53%;top:6%;width:43%;height:88%;opacity:1}.ws[data-s="1"] .c{left:53%;top:6%;width:43%;height:40%;opacity:0;transform:scale(.8)}
+.ws[data-s="2"] .a{left:4%;top:6%;width:56%;height:52%}.ws[data-s="2"] .b{left:38%;top:30%;width:56%;height:52%;opacity:1;transform:rotate(2deg)}.ws[data-s="2"] .c{left:16%;top:46%;width:52%;height:46%;opacity:1;transform:rotate(-2deg)}
+@media(max-width:860px){.steps .stick{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding-top:70px}.st-t{height:230px}}
+
+/* performance */
+.perf{padding:140px 0;text-align:center;position:relative;overflow:hidden}
+.perf .sh{max-width:900px;margin:0 auto}
+.perf .sub{font-size:21px;color:#a1a1a6;max-width:640px;margin:18px auto 0}
+.die{width:min(78vw,420px);margin:64px auto 0}
+.core{fill:#11112a;stroke:#3a3a6a;stroke-width:1;transition:fill .5s}
+.live .core{animation:glow 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * .17s)}
+@keyframes glow{0%,100%{fill:#11112a;stroke:#3a3a6a}50%{fill:#6c5cff;stroke:#35d5ff}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:44px;margin-top:84px}
+.stats b{display:block;font-size:clamp(56px,8vw,104px);font-weight:700;letter-spacing:-.055em;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{display:block;font-size:17px;color:#a1a1a6;margin-top:8px}
+.gauge{width:100%;max-width:150px;margin:0 auto 16px}
+.gauge circle{fill:none;stroke-width:6;stroke-linecap:round}
+.gauge .bg{stroke:#202024}.gauge .fg{stroke:url(#gg);stroke-dasharray:314;stroke-dashoffset:314;transition:stroke-dashoffset 1.8s var(--ease);transform:rotate(-90deg);transform-origin:center}
+
+/* specs */
+.specs{padding:120px 0}
+.spec{display:grid;grid-template-columns:1fr 2fr;gap:30px;padding:26px 0;border-bottom:1px solid #d2d2d7}
+.spec:first-of-type{margin-top:50px;border-top:1px solid #d2d2d7}
+.spec h4{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.spec p{font-size:17px;color:#515154}
+@media(max-width:700px){.spec{grid-template-columns:1fr;gap:6px}}
+
+.end{padding:130px 22px;text-align:center}
+.end h2{font-size:clamp(40px,7vw,88px);font-weight:700;letter-spacing:-.05em;line-height:1.02}
+.end p{font-size:21px;color:#a1a1a6;margin-top:14px}
+footer{background:var(--lt);color:#6e6e73;font-size:12px;padding:20px 0 40px;line-height:1.5}
+footer .wrap{max-width:1024px}
+footer p{padding:14px 0;border-bottom:1px solid #d2d2d7;max-width:900px}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:14px}
+footer .row div{display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="gn">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="HORYZON"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 2h4v7h8V2h4v20h-4v-9H8v9H4z"/></svg></a>
+    <ul>
+      <li><a href="#top">Mac</a></li><li><a href="#top">Studio</a></li><li><a href="#top">Phone</a></li>
+      <li><a href="#top">Watch</a></li><li><a href="#top">Cloud</a></li><li><a href="#top">Support</a></li>
+    </ul>
+    <div class="ic">
+      <button aria-label="Search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg></button>
+      <button aria-label="Bag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="ln" id="ln">
+  <div class="wrap">
+    <b>Horyn Book OS</b>
+    <nav><a href="#top">Overview</a><a href="#highlights">Highlights</a><a href="#perf">Performance</a><a href="#specs">Tech Specs</a><a class="pill" href="#end">Pre-order</a></nav>
+  </div>
+</div>
+
+<main id="top">
+<section class="hero">
+  <div class="eyebrow in">New</div>
+  <h1 class="in">Horyn Book <span>OS</span></h1>
+  <p class="in">The desktop operating system that never gets in your way.</p>
+  <div class="cta in">
+    <a class="btn" href="#end">Pre-order</a>
+    <a class="lnk" href="#highlights">Watch the film
+      <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10 8 6 4-6 4z" fill="currentColor"/></svg></a>
+  </div>
+</section>
+
+<section class="pin" id="pin">
+  <div class="stick">
+    <div class="dev" id="dev">
+      <div class="wp"><i></i><i></i><i></i></div>
+      <div class="mb">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 2h4v7h8V2h4v20h-4v-9H8v9H4z"/></svg>
+        <b>Finder</b><span>File</span><span>Edit</span><span>View</span><span>Go</span><span class="r">Fri 9:41</span>
+      </div>
+      <div class="cap">Meet the new desktop.</div>
+      <div class="win w1"><u></u><div class="bd"><div class="art"></div><em style="width:70%"></em><em style="width:90%"></em><em style="width:55%"></em><em style="width:80%"></em></div></div>
+      <div class="win w2"><u></u><div class="bd"><div class="wave"><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s></div><em style="width:60%"></em><em style="width:85%"></em></div></div>
+      <div class="win w3"><u></u><div class="bd"><em style="width:40%"></em><em style="width:92%"></em><em style="width:75%"></em><em style="width:88%"></em></div></div>
+      <div class="dock" id="dock"></div>
+    </div>
+  </div>
+</section>
+
+<section class="scrub" id="scrub">
+  <div class="stick"><p id="scrubText">Every pixel, every process, rethought from the ground up. Horyn Book OS runs five apps at once, holds a steady 120 frames per second, and sips power like it has nowhere else to be.</p></div>
+</section>
+
+<section class="light" id="highlights">
+  <div class="wrap"><h2 class="sh rv">Get the highlights.</h2></div>
+  <div class="rail" id="rail">
+    <article class="card">
+      <small>Fluid</small><h3>120 frames. Not a single one dropped.</h3>
+      <div class="vis"><svg viewBox="0 0 300 300" width="270"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#8b7bff"/><stop offset="1" stop-color="#35d5ff"/></linearGradient></defs>
+        <g class="ring" fill="none" stroke="url(#g1)" stroke-width="3"><circle cx="150" cy="150" r="120" stroke-dasharray="6 14"/><circle cx="150" cy="150" r="86" stroke-dasharray="40 10"/><circle cx="150" cy="150" r="52" stroke-dasharray="90 20"/></g><circle cx="150" cy="150" r="22" fill="url(#g1)"/></svg></div>
+    </article>
+    <article class="card k">
+      <small>Spaces</small><h3>Five apps. One calm desktop.</h3>
+      <div class="vis"><svg viewBox="0 0 300 260" width="290"><g class="lay"><rect x="30" y="20" width="170" height="110" rx="16" fill="#6c5cff"/></g><g class="lay"><rect x="90" y="75" width="180" height="110" rx="16" fill="#19b4ff" opacity=".92"/></g><g class="lay"><rect x="50" y="130" width="170" height="100" rx="16" fill="#ff6fd0" opacity=".9"/></g></svg></div>
+    </article>
+    <article class="card g">
+      <small>Private</small><h3>What happens on your Mac stays on your Mac.</h3>
+      <div class="vis"><svg viewBox="0 0 200 220" width="190" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"><path d="M55 100V72a45 45 0 0 1 90 0v28"/><rect x="34" y="100" width="132" height="100" rx="24" fill="rgba(255,255,255,.14)"/><circle cx="100" cy="148" r="9" fill="#fff" stroke="none"/></svg></div>
+    </article>
+    <article class="card">
+      <small>Efficient</small><h3>Up to 22 hours. Then keep going.</h3>
+      <div class="vis"><svg viewBox="0 0 260 140" width="290"><defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#34c98a"/><stop offset="1" stop-color="#35d5ff"/></linearGradient></defs>
+        <rect x="8" y="20" width="222" height="100" rx="26" fill="none" stroke="#1d1d1f" stroke-width="8"/><rect x="238" y="53" width="14" height="34" rx="6" fill="#1d1d1f"/><rect x="24" y="36" width="190" height="68" rx="14" fill="url(#g2)"/></svg></div>
+    </article>
+  </div>
+  <div class="ctl"><button id="prev" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button><button id="next" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m9 5 7 7-7 7"/></svg></button></div>
+</section>
+
+<section class="steps" id="steps">
+  <div class="stick">
+    <div class="st-t">
+      <div class="st on"><h3>Stay in <span>focus.</span></h3><p>One window fills the space. Everything else quietly steps aside until you call it back.</p></div>
+      <div class="st"><h3>Work in <span>pairs.</span></h3><p>Snap two apps side by side and the layout adapts to the content, not the other way around.</p></div>
+      <div class="st"><h3>Think in <span>spaces.</span></h3><p>Group apps into layers you can summon with a gesture and put away just as fast.</p></div>
+    </div>
+    <div class="ws" id="ws" data-s="0"><div class="t a"></div><div class="t b"></div><div class="t c"></div></div>
+  </div>
+</section>
+
+<section class="perf" id="perf">
+  <div class="wrap">
+    <h2 class="sh rv">Built for speed.<br>Tuned for silence.</h2>
+    <p class="sub rv">Sixteen efficient cores share the load, so the system stays responsive while everything runs at once.</p>
+    <svg class="die" id="die" viewBox="0 0 400 400" aria-label="Processor die"></svg>
+    <div class="stats" id="stats">
+      <div><svg class="gauge" viewBox="0 0 120 120"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#8b7bff"/><stop offset="1" stop-color="#35d5ff"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" cx="60" cy="60" r="50" data-v=".92"/></svg><b data-n="120" data-s=" fps">0</b><span>Steady interface refresh</span></div>
+      <div><svg class="gauge" viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" cx="60" cy="60" r="50" data-v=".78"/></svg><b data-n="0.9" data-s=" s" data-f="1">0</b><span>From sleep to sign-in</span></div>
+      <div><svg class="gauge" viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" cx="60" cy="60" r="50" data-v=".85"/></svg><b data-n="22" data-s=" h">0</b><span>Battery on a single charge</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="light specs" id="specs">
+  <div class="wrap">
+    <h2 class="sh rv">Tech Specs</h2>
+    <div class="spec"><h4>Kernel</h4><p>Modular hybrid kernel with per-app memory budgets and live process suspension.</p></div>
+    <div class="spec"><h4>Interface</h4><p>GPU-optional compositor with damage tracking, 120 Hz output, and full right-to-left layout support.</p></div>
+    <div class="spec"><h4>Memory</h4><p>Compressed memory by default. Runs five full apps in 4 GB, and scales to 64 GB.</p></div>
+    <div class="spec"><h4>Security</h4><p>Full-disk encryption, sandboxed apps, and verified boot on every start.</p></div>
+    <div class="spec"><h4>Architecture</h4><p>Native on x86-64 and ARM64.</p></div>
+    <div class="spec"><h4>Updates</h4><p>Silent background updates applied at the next restart. No waiting screen.</p></div>
+  </div>
+</section>
+
+<section class="end" id="end">
+  <h2>Horyn Book OS.<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Ready when you are.</span></h2>
+  <p>Pre-order today and be first to start.</p>
+  <div class="cta"><a class="btn" href="#top">Pre-order</a><a class="lnk" href="#specs">Compare specs</a></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Features, performance figures, and availability vary by device and region. Battery life depends on configuration and usage.</p>
+    <div class="row"><span>Copyright © 2026 HORYZON. All rights reserved.</span><div><a href="#top">Privacy Policy</a><a href="#top">Terms of Use</a><a href="#top">Legal</a><a href="#top">Site Map</a></div></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var clamp=function(v,a,b){return Math.min(b===undefined?1:b,Math.max(a===undefined?0:a,v))};
+  var ease=function(t){return 1-Math.pow(1-t,3)};
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // dock icons
+  var icons=[['#4d9bff,#2a5bd7','<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/>'],
+    ['#ffb347,#ff6b3d','<rect x="5" y="5" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="13" y="5" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="5" y="13" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="6" height="6" rx="1.5" fill="currentColor"/>'],
+    ['#34c98a,#0f8f64','<path d="M3 8h7l2 2h9v9H3z" fill="currentColor"/>'],
+    ['#ff6fd0,#b8337f','<path d="M4 12h2m3-5v10m3-8v6m3-9v12m3-8h2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/>'],
+    ['#8b7bff,#4a36d9','<path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.4 6.2L12 16.8 6.4 20l1.4-6.2L3 9.5l6.4-.7z" fill="currentColor"/>']];
+  $('#dock').innerHTML=icons.map(function(i){return '<div style="background:linear-gradient(145deg,'+i[0]+')"><svg viewBox="0 0 24 24">'+i[1]+'</svg></div>'}).join('');
+
+  // processor die
+  var die=$('#die'),h='<defs><linearGradient id="dg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#8b7bff"/><stop offset="1" stop-color="#35d5ff"/></linearGradient></defs>';
+  for(var k=0;k<12;k++){var o=62+k*24.8;
+    h+='<path d="M'+o+' 40V14M'+o+' 360v26M40 '+o+'H14M360 '+o+'h26" stroke="#2c2c3c" stroke-width="3" stroke-linecap="round"/>';}
+  h+='<rect x="40" y="40" width="320" height="320" rx="32" fill="#08080f" stroke="url(#dg)" stroke-width="2.5"/>';
+  for(var r=0;r<4;r++)for(var c=0;c<4;c++){var i=r*4+c;h+='<rect class="core" style="--i:'+i+'" x="'+(66+c*66)+'" y="'+(66+r*66)+'" width="56" height="56" rx="10"/>';}
+  die.innerHTML=h;
+
+  // scroll-driven
+  var pin=$('#pin'),dev=$('#dev'),scrub=$('#scrub'),steps=$('#steps'),ws=$('#ws'),ln=$('#ln');
+  var words=$('#scrubText').textContent.trim().split(/\s+/);
+  $('#scrubText').innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  var ws_=$$('#scrubText .w'), sts=$$('.st');
+  function prog(el){var r=el.getBoundingClientRect();return clamp(-r.top/(r.height-innerHeight))}
+  var tick=false;
+  function frame(){
+    tick=false;
+    ln.classList.toggle('s',scrollY>10);
+    if(!reduce){
+      var p=prog(pin),e=ease(clamp(p/.85)),s=.5+.5*e;
+      dev.style.transform='scale('+s+')';
+      dev.style.borderRadius=(60*(1-e)/s)+'px';
+      dev.style.setProperty('--p',e.toFixed(3));
+    }else dev.style.setProperty('--p',1);
+    var sp=prog(scrub),n=ws_.length;
+    ws_.forEach(function(w,i){var t=clamp(sp*1.15*n-i,0,1);w.style.opacity=(.16+.84*t).toFixed(2)});
+    var q=Math.min(2,Math.floor(prog(steps)*3)),on=q;
+    if(ws.dataset.s!=on){ws.dataset.s=on;sts.forEach(function(s2,i){s2.classList.toggle('on',i===on)})}
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(frame)}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);frame();
+
+  // reveal + counters + gauges
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;var el=en.target;
+    if(el.classList.contains('rv'))el.classList.add('on');
+    if(el.id==='die')el.classList.add('live');
+    if(el.id==='stats'){
+      $$('b[data-n]',el).forEach(function(b){var n=+b.dataset.n,s=b.dataset.s,f=b.dataset.f,t0=performance.now();
+        (function step(t){var p=clamp((t-t0)/1600),v=n*ease(p);b.textContent=(f?v.toFixed(1):Math.round(v))+s;if(p<1)requestAnimationFrame(step)})(t0)});
+      $$('.fg',el).forEach(function(c){c.style.strokeDashoffset=314*(1-c.dataset.v)});
+    }
+    io.unobserve(el);
+  })},{threshold:.3});
+  $$('.rv,#die,#stats').forEach(function(el){io.observe(el)});
+
+  // carousel
+  var rail=$('#rail');
+  function go(d){rail.scrollBy({left:d*(rail.querySelector('.card').offsetWidth+20),behavior:'smooth'})}
+  $('#prev').onclick=function(){go(-1)};$('#next').onclick=function(){go(1)};
+})();
+</script>
+</body>
+</html>
