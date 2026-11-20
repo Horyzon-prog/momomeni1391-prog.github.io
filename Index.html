@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>Horyzon — فراتر از تصور</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg:#000;
+  --text:#f5f5f7;
+  --muted:#86868b;
+  --blue:#2997ff;
+  --card:#101014;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Vazirmatn',sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:54px;
+  z-index:100;
+  background:rgba(15,15,17,.78);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav-inner{
+  max-width:1050px;
+  height:100%;
+  margin:auto;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+.logo span{color:#999}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:32px;
+  font-size:12px;
+  color:#c5c5c7;
+}
+.nav-links a{transition:.25s}
+.nav-links a:hover{color:white}
+.nav-action{
+  background:#f5f5f7;
+  color:#111;
+  border:0;
+  padding:6px 15px;
+  border-radius:20px;
+  font-size:11px;
+  transition:.25s;
+}
+.nav-action:hover{background:#ccc;transform:scale(1.04)}
+.menu-btn{
+  display:none;
+  color:white;
+  background:none;
+  border:0;
+  font-size:24px;
+}
+.hero{
+  min-height:790px;
+  padding:160px 20px 70px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  background:
+  radial-gradient(ellipse at 50% 80%,#20232b 0%,#09090c 42%,#000 75%);
+  position:relative;
+  overflow:hidden;
+}
+.eyebrow{
+  color:#a1a1a6;
+  font-size:14px;
+  margin-bottom:24px;
+  letter-spacing:2px;
+}
+.hero h1{
+  font-size:clamp(55px,10vw,115px);
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:-5px;
+}
+.hero h1 span{
+  background:linear-gradient(110deg,#fff,#8e939f,#fff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  color:#aaaab0;
+  font-size:17px;
+  margin-top:20px;
+  max-width:540px;
+  line-height:2.1;
+}
+.buttons{
+  display:flex;
+  gap:15px;
+  margin-top:32px;
+}
+.btn{
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:13px;
+  transition:.3s;
+}
+.btn-primary{
+  background:#2997ff;
+  color:white;
+}
+.btn-primary:hover{background:#58adff;transform:scale(1.04)}
+.btn-outline{
+  color:#2997ff;
+  border:1px solid #2997ff;
+}
+.btn-outline:hover{
+  background:#2997ff;
+  color:white;
+}
+.hero-art{
+  width:min(750px,95%);
+  height:260px;
+  margin-top:75px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:900px;
+}
+.orbit{
+  width:360px;
+  height:360px;
+  position:absolute;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:50%;
+  box-shadow:0 0 100px rgba(90,110,160,.12);
+}
+.device{
+  width:250px;
+  height:165px;
+  border-radius:14px;
+  background:linear-gradient(145deg,#454955,#111319 60%,#343944);
+  border:2px solid #555b68;
+  transform:rotateX(12deg) rotateY(-15deg);
+  box-shadow:0 30px 80px #000,0 0 60px rgba(130,150,200,.14);
+  position:relative;
+  z-index:2;
+}
+.device::before{
+  content:'HORYN';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:5px;
+  color:#dce0e8;
+}
+.device::after{
+  content:'';
+  position:absolute;
+  width:110%;
+  height:7px;
+  bottom:-9px;
+  left:-5%;
+  border-radius:0 0 12px 12px;
+  background:linear-gradient(90deg,#343943,#858b99,#343943);
+}
+.section{
+  padding:110px 22px;
+  text-align:center;
+}
+.section-label{
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:2px;
+}
+.section h2{
+  font-size:clamp(35px,6vw,65px);
+  font-weight:700;
+  margin:15px 0;
+  letter-spacing:-2px;
+}
+.section-desc{
+  color:#929297;
+  font-size:15px;
+  max-width:600px;
+  margin:0 auto;
+  line-height:2;
+}
+.products{
+  max-width:1100px;
+  margin:60px auto 0;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+.product{
+  min-height:480px;
+  background:var(--card);
+  border-radius:24px;
+  padding:55px 25px 35px;
+  overflow:hidden;
+  position:relative;
+  transition:transform .4s,border .4s;
+  border:1px solid rgba(255,255,255,.04);
+}
+.product:hover{transform:translateY(-7px);border-color:#34343b}
+.product h3{
+  font-size:36px;
+  font-weight:700;
+}
+.product p{
+  color:#999;
+  margin-top:10px;
+  font-size:14px;
+}
+.product a{
+  display:inline-block;
+  margin-top:20px;
+  color:#2997ff;
+  font-size:13px;
+}
+.product-art{
+  height:230px;
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.laptop{
+  width:270px;
+  height:165px;
+  background:linear-gradient(135deg,#8c909b,#262a33);
+  border:3px solid #666b75;
+  border-radius:12px;
+  position:relative;
+  box-shadow:0 30px 40px #000;
+}
+.laptop::after{
+  content:'';
+  position:absolute;
+  bottom:-12px;
+  left:-8%;
+  width:116%;
+  height:10px;
+  background:linear-gradient(90deg,#444,#aaa,#444);
+  border-radius:3px;
+}
+.laptop::before{
+  content:'H';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:50px;
+  font-weight:800;
+  color:#d9dce4;
+}
+.tablet{
+  width:145px;
+  height:205px;
+  border-radius:20px;
+  border:5px solid #666b75;
+  background:linear-gradient(145deg,#333844,#11131a);
+  box-shadow:0 25px 50px #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  font-weight:800;
+}
+.phone{
+  width:105px;
+  height:205px;
+  border-radius:23px;
+  border:4px solid #747985;
+  background:linear-gradient(145deg,#343945,#080a10);
+  box-shadow:0 25px 50px #000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:27px;
+  font-weight:800;
+  position:relative;
+}
+.phone::before{
+  content:'';
+  position:absolute;
+  top:7px;
+  width:35px;
+  height:8px;
+  border-radius:10px;
+  background:#090a0e;
+}
+.flow{
+  background:linear-gradient(150deg,#11141c,#08090c);
+  padding:120px 20px;
+}
+.flow-box{
+  max-width:1000px;
+  margin:55px auto 0;
+  padding:65px 30px;
+  border:1px solid #292b32;
+  border-radius:28px;
+  background:rgba(255,255,255,.025);
+}
+.flow-logo{
+  font-size:75px;
+  font-weight:800;
+  letter-spacing:-5px;
+  background:linear-gradient(120deg,#fff,#7e879a);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.flow-box p{
+  color:#999;
+  margin-top:15px;
+  line-height:2;
+}
+.features{
+  max-width:1000px;
+  margin:60px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.feature{
+  padding:30px 20px;
+  border-top:1px solid #303038;
+}
+.feature-icon{
+  font-size:28px;
+  margin-bottom:18px;
+  color:#aaa;
+}
+.feature h3{font-size:17px;margin-bottom:12px}
+.feature p{font-size:12px;color:#929297;line-height:2}
+.final{
+  padding:130px 20px;
+  background:radial-gradient(ellipse at center,#171c27,#000 70%);
+  text-align:center;
+}
+.final h2{
+  font-size:clamp(42px,8vw,85px);
+  font-weight:800;
+}
+.final p{
+  color:#999;
+  margin-top:20px;
+}
+footer{
+  padding:35px 20px;
+  border-top:1px solid #202024;
+  text-align:center;
+  color:#777;
+  font-size:11px;
+  line-height:2.5;
+}
+footer strong{color:#ccc}
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .9s,transform .9s;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+@media(max-width:700px){
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:54px;
+    right:0;
+    width:100%;
+    background:#111114;
+    padding:25px;
+    flex-direction:column;
+    gap:25px;
+    border-bottom:1px solid #333;
+  }
+  .nav-links.active{display:flex}
+  .menu-btn{display:block}
+  .nav-action{display:none}
+  .hero{min-height:720px;padding-top:145px}
+  .hero h1{letter-spacing:-2px}
+  .hero p{font-size:14px}
+  .hero-art{margin-top:45px}
+  .orbit{width:270px;height:270px}
+  .device{width:210px;height:140px}
+  .products{grid-template-columns:1fr}
+  .product{min-height:420px}
+  .features{grid-template-columns:1fr}
+  .section{padding:85px 18px}
+  .flow-logo{font-size:55px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Horyzon<span>.</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">خانه</a>
+      <a href="#products">محصولات</a>
+      <a href="#flow">Horyn</a>
+      <a href="#about">درباره ما</a>
+    </div>
+    <a href="#products" class="nav-action">مشاهده محصولات</a>
+    <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="eyebrow">HORYZON TECHNOLOGY</div>
+  <h1><span>فراتر از</span><br>تصور.</h1>
+  <p>
+    آینده فناوری، جایی که طراحی، قدرت و هوش مصنوعی
+    در یک تجربه متفاوت به هم می‌رسند.
+  </p>
+  <div class="buttons">
+    <a href="#products" class="btn btn-primary">کشف محصولات</a>
+    <a href="#about" class="btn btn-outline">بیشتر بدانید</a>
+  </div>
+  <div class="hero-art">
+    <div class="orbit"></div>
+    <div class="device"></div>
+  </div>
+</header>
+
+<section class="section reveal" id="products">
+  <div class="section-label">THE HORYZON ECOSYSTEM</div>
+  <h2>یک اکوسیستم.<br>بی‌نهایت امکان.</h2>
+  <p class="section-desc">
+    دستگاه‌هایی که برای هماهنگی کامل ساخته شده‌اند.
+    هر محصول، بخشی از یک تجربه یکپارچه است.
+  </p>
+
+  <div class="products">
+    <article class="product">
+      <h3>Horyn Book</h3>
+      <p>قدرت در نهایت ظرافت.</p>
+      <a href="#about">بیشتر بدانید ←</a>
+      <div class="product-art"><div class="laptop"></div></div>
+    </article>
+
+    <article class="product">
+      <h3>Horyn Pad</h3>
+      <p>آزادی برای خلق کردن.</p>
+      <a href="#about">بیشتر بدانید ←</a>
+      <div class="product-art"><div class="tablet">H</div></div>
+    </article>
+
+    <article class="product">
+      <h3>Horyn One</h3>
+      <p>دنیای شما، همیشه همراه شما.</p>
+      <a href="#about">بیشتر بدانید ←</a>
+      <div class="product-art"><div class="phone">H</div></div>
+    </article>
+
+    <article class="product">
+      <h3>Horyn</h3>
+      <p>هوشمندی در تمام لحظات.</p>
+      <a href="#flow">بیشتر بدانید ←</a>
+      <div class="product-art">
+        <div class="flow-logo">H.</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="flow reveal" id="flow">
+  <div class="section-label">INTELLIGENCE REIMAGINED</div>
+  <h2 style="text-align:center;font-size:55px">معرفی Horyn</h2>
+  <div class="flow-box">
+    <div class="flow-logo">Horyn.</div>
+    <p>
+      دستیار هوشمند اکوسیستم Horyzon؛
+      تجربه‌ای جدید برای ارتباط، خلاقیت و تعامل
+      با فناوری.
+    </p>
+    <a href="#about" class="btn btn-outline" style="display:inline-block;margin-top:25px">
+      کشف دنیای Horyn
+    </a>
+  </div>
+</section>
+
+<section class="section reveal" id="about">
+  <div class="section-label">WHY HORYZON</div>
+  <h2>سادگی، با هدفی بزرگ.</h2>
+  <p class="section-desc">
+    ما به فناوری‌ای باور داریم که پیچیدگی را پنهان
+    می‌کند و تجربه‌ای ساده و یکپارچه ارائه می‌دهد.
+  </p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">◈</div>
+      <h3>طراحی ماندگار</h3>
+      <p>زیبایی در جزئیات و سادگی در تجربه کاربری.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⌘</div>
+      <h3>یکپارچگی</h3>
+      <p>محصولاتی که در کنار یکدیگر معنا پیدا می‌کنند.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✳</div>
+      <h3>نوآوری</h3>
+      <p>نگاهی متفاوت به آینده فناوری و هوش مصنوعی.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final reveal">
+  <div class="section-label">WELCOME TO THE FUTURE</div>
+  <h2>آینده، از اینجا شروع می‌شود.</h2>
+  <p>Horyzon — Think Beyond.</p>
+  <a href="#home" class="btn btn-primary" style="display:inline-block;margin-top:30px">
+    بازگشت به بالا
+  </a>
+</section>
+
+<footer>
+  <strong>Horyzon</strong><br>
+  Think Beyond.<br>
+  © 2026 Horyzon. All rights reserved.<br>
+  نسخه آزمایشی وب‌سایت Horyzon
+</footer>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click',()=>{
+  navLinks.classList.toggle('active');
+  menuBtn.textContent = navLinks.classList.contains('active') ? '×' : '☰';
+});
+
+document.querySelectorAll('.nav-links a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    navLinks.classList.remove('active');
+    menuBtn.textContent='☰';
+  });
+});
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el=>{
+  observer.observe(el);
+});
+</script>
+
+</body>
+  </html>
+    
